@@ -1,0 +1,19 @@
+---
+# tasks file for ansible-role-hostname
+- name: Change the hostname to our standard
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+  notify: Restart host
+
+- name: Hostname match ansible_hostname?
+  ansible.builtin.debug:
+    msg: 'hostname: {{ hostname }}, ansible_hostname: {{ ansible_hostname }}'
+
+- name: Fix /etc/hosts removing the old hostname
+  ansible.builtin.lineinfile:    
+    dest: /etc/hosts
+    line: "{{ ansible_default_ipv4.address }} {{ hostname }}"
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    state: present
+  when:
+    - hostname_change_fix_etc_hosts

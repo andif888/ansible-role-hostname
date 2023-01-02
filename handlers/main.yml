@@ -1,0 +1,6 @@
+---
+# handlers file for ansible-role-hostname
+- name: Restart host
+  ansible.builtin.reboot:
+    post_reboot_delay: 3
+  when: hostname_change_force_reboot

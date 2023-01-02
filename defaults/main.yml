@@ -1,0 +1,10 @@
+---
+# defaults file for ansible-role-hostname
+# var hostname:description: hostname to set
+hostname: "{{ inventory_hostname_short }}"
+
+# var hostname_change_force_reboot:description: force reboot after hostname is changed
+hostname_change_force_reboot: true
+
+# var hostname_change_fix_etc_hosts: description: fix entry in /etc/hosts
+hostname_change_fix_etc_hosts: true
